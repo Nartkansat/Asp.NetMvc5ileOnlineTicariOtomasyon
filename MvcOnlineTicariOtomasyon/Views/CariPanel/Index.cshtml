@@ -1,0 +1,207 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Mesajlar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>AdminLTE 3 | User Profile</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Ionicons -->
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+
+    <!-- Google Font: Source Sans Pro -->
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Profilim</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="~/AdminLTE-3.0.4/dist/img/user8-128x128.jpg"
+                                         alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center">@ViewBag.adsoyad</h3>
+                                <p style="margin:0" class="text-muted text-center">@ViewBag.m</p>
+                                <p class="text-muted text-center">@ViewBag.sehir</p>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Toplam Satış</b> <a class="float-right">@ViewBag.toplamsatis</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Toplam Satış Tutarı:</b> <a class="float-right">@ViewBag.toplamtutar ₺</a>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        <b>Toplam Ürün Sayısı:</b> <a class="float-right">@ViewBag.toplamurunsayisi</a>
+
+                                    </li>
+
+                                </ul>
+                                <a href="/CariPanel/KargoTakip/" class="btn btn-primary btn-block"><b>Kargo Takip</b></a>
+                            </div>
+
+                            <!-- /.card-body -->
+
+                        </div>
+
+                        @*<div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Hakkımda</h3>
+                                </div>
+                                <div class="card-body">
+                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Şehir</strong>
+                                    <p class="text-muted"></p>
+                                    <hr>
+                                    <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                                    <p class="text-muted">
+
+                                        <span class="tag tag-danger">UI Design</span>
+                                        <span class="tag tag-success">Coding</span>
+                                        <span class="tag tag-info">Javascript</span>
+                                        <span class="tag tag-warning">PHP</span>
+                                        <span class="tag tag-primary">Node.js</span>
+                                    </p>
+                                    <hr>
+                                    <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                                </div>
+                            </div>*@
+                    </div>
+
+                    <!-- /.col -->
+
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Mesajlar</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Duyurular</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ayarlar</a></li>
+                                </ul>
+                            </div><!-- /.card-header -->
+
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="activity">
+                                        <!-- Post -->
+                                        @foreach (var x in Model)
+                                        {
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="~/AdminLTE-3.0.4/dist/img/user1-128x128.jpg" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#">@x.Gönderici</a>
+                                                        <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                                                    </span>
+                                                    <span class="description">@x.Konu - @x.Tarih.ToShortDateString()</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    @x.icerik
+
+                                                </p>
+                                            </div>
+
+                                        }
+                                    </div>
+
+                                    <div class="tab-pane" id="timeline">
+                                        @Html.Action("Partial2", "CariPanel")
+                                    </div>
+
+                                    <div class="tab-pane" id="settings">
+
+                                        @Html.Action("Partial1","CariPanel")
+
+                                    </div>
+
+                                </div>
+
+                            </div><!-- /.card-body -->
+
+                        </div>
+
+                        <!-- /.nav-tabs-custom -->
+
+                    </div>
+
+                    <!-- /.col -->
+
+                </div>
+
+                <!-- /.row -->
+
+            </div><!-- /.container-fluid -->
+
+        </section>
+
+        <!-- /.content -->
+
+    </div>
+
+
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE App -->
+
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+
+</body>
+
+</html>

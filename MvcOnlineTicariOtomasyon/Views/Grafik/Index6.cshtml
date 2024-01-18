@@ -1,0 +1,300 @@
+﻿@model IEnumerable<MvcOnlineTicariOtomasyon.Models.Siniflar.SinifGrup>
+
+@{
+    ViewBag.Title = "Index6";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | ChartJS</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <br />
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@ViewBag.d1</h3>
+                                <p>Max. Fiyatlı Ürün</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-android-clipboard"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@ViewBag.d2 ₺</h3>
+
+                                <p>Toplam Kasa</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-social-usd"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>@ViewBag.d3 </h3>
+
+                                <p>En Çok Satılan Ürün</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-android-desktop"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@ViewBag.d4 </h3>
+
+                                <p>Toplam Stok</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-social-buffer"></i>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- PIE CHART -->
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Ürün & Stok</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <div class="col-md-6">
+                        <!-- PIE CHART -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Ürün & Marka</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="pieChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Müşteri & Şehir Tablosu</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Şehir</th>
+                                            <th>Progress Bar</th>
+                                            <th style="width: 40px">Adet</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int sirano = 0;
+                                        }
+                                        @foreach (var x in Model)
+                                        {
+                                            <tr>
+                                                <td>@{sirano++; } @sirano</td>
+                                                <td>@x.Sehir</td>
+                                                <td>
+                                                    @if (x.Sayi == 1)
+                                                    {
+                                                        <div class="progress progress-xs">
+                                                            <div class="progress-bar bg-danger" style="width: 55%"></div>
+                                                        </div>
+                                                    }
+                                                    @if (x.Sayi == 2)
+                                                    {
+                                                        <div class="progress progress-xs">
+                                                            <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                                        </div>
+                                                    }
+                                                    @if (x.Sayi >= 7)
+                                                    {
+                                                        <div class="progress progress-xs">
+                                                            <div class="progress-bar bg-warning" style="width: 90%"></div>
+                                                        </div>
+                                                    }
+                                                </td>
+
+                                                <td style="padding-top:0px !important;">
+                                                    @if (x.Sayi == 1)
+                                                    {
+                                                        <span class="badge bg-warning">@x.Sayi</span>
+                                                    }
+                                                    @if (x.Sayi == 2)
+                                                    {
+                                                        <span class="badge bg-primary">@x.Sayi</span>
+                                                    }
+                                                    @if (x.Sayi >= 7)
+                                                    {
+                                                        <span class="badge bg-danger">@x.Sayi</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Action("Partial1", "Grafik")
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <script src="/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="/AdminLTE-3.0.4/plugins/chart.js/Chart.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/AdminLTE-3.0.4/dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            //- PIE CHART 1
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '/Grafik/GetPieChartData', // Controller ve action adınıza göre güncelleyin
+                    success: function (result) {
+                        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+                        var pieData = {
+                            labels: result.map(item => item.urn),
+                            datasets: [
+                                {
+                                    data: result.map(item => item.stk),
+                                    backgroundColor: [
+                                        '#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#8b658b', '#8b4513', '#eee8aa', '#8b8682', '#00b2ee'
+                                        // Buraya dilediğiniz renkleri ekleyebilirsiniz.
+                                    ]
+                                }
+                            ]
+                        };
+                        var pieOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                        };
+
+                        // Create pie or douhnut chart
+                        // You can switch between pie and douhnut using the method below.
+                        var pieChart = new Chart(pieChartCanvas, {
+                            type: 'pie',
+                            data: pieData,
+                            options: pieOptions
+                        });
+                    }
+                });
+            });
+            //- PIE CHART 2
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '/Grafik/GetPieChartData2', // Controller ve action adınıza göre güncelleyin
+                    success: function (result) {
+                        var pieChartCanvas = $('#pieChart2').get(0).getContext('2d');
+                        var pieData = {
+                            labels: result.map(item => item.Marka),
+                            datasets: [
+                                {
+                                    data: result.map(item => item.Sayi),
+                                    backgroundColor: [
+                                        '#00c0ef', '#00a65a', '#f39c12', '#f56954', '#3c8dbc', '#d2d6de', '#8b658b', '#8b4513', '#eee8aa', '#8b8682', '#00b2ee'
+                                        // Buraya dilediğiniz renkleri ekleyebilirsiniz.
+                                    ]
+                                }
+                            ]
+                        };
+                        var pieOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                        };
+
+                        // Create pie or douhnut chart
+                        // You can switch between pie and douhnut using the method below.
+                        var pieChart = new Chart(pieChartCanvas, {
+                            type: 'pie',
+                            data: pieData,
+                            options: pieOptions
+                        });
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+</html>

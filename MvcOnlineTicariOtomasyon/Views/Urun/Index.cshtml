@@ -1,0 +1,56 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-6" style="display:flex; ">
+            <label style="padding-top:7px; width:100px;">Ürün Adı:</label> @Html.TextBox("p", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Ara" class="btn btn-dark" />
+        </div>
+    </div>
+}
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Ürün</th>
+        <th>Marka</th>
+        <th>Stok</th>
+        <th>Alış Fiyat</th>
+        <th>Satış Fiyat</th>
+        <th>Kategori</th>
+        <th>Görsel</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th>Satış Yap</th>
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.UrunAd</td>
+            <td>@u.Marka</td>
+            <td>@u.Stok</td>
+            <td>@u.AlisFiyat ₺</td>
+            <td>@u.SatisFiyat ₺</td>
+            <td>@u.Kategori.KategoriAd</td>
+            <td><img src="@u.UrunGorsel" class="img-fluid" width="100" /></td>
+            <td><a href="/Urun/UrunSil/@u.Urunid" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Urun/UrunGetir/@u.Urunid" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Urun/SatisYap/@u.Urunid" class="btn btn-warning">Satış Yap</a></td>
+
+        </tr>
+    }
+
+</table>
+
+<a href="/Urun/YeniUrun/" class="btn btn-primary">Ürün Ekle</a>
+
+<br />
+<br />

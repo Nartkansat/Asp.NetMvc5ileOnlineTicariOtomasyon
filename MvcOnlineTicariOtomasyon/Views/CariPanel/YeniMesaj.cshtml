@@ -1,0 +1,265 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Mesajlar
+
+@{
+
+    ViewBag.Title = "YeniMesaj";
+
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>AdminLTE 3 | Compose Message</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Ionicons -->
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+
+    <!-- summernote -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
+
+    <!-- Google Font: Source Sans Pro -->
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+
+
+
+
+    <!-- Content Header (Page header) -->
+
+    <section class="content-header">
+
+        <div class="container-fluid">
+
+            <div class="row mb-2">
+
+                <div class="col-sm-6">
+                    <h1>Yeni Mesaj Oluştur</h1>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <a href="/CariPanel/GelenMesajlar" class="btn btn-primary btn-block mb-3">Geri Dön</a>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Klasörler</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column">
+
+                                <li class="nav-item active">
+                                    <a href="/CariPanel/GelenMesajlar/" class="nav-link">
+                                        <i class="fas fa-inbox"></i> Gelen Kutusu
+                                        <span class="badge bg-danger float-right">@ViewBag.d1</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/CariPanel/GidenMesajlar/" class="nav-link">
+                                        <i class="far fa-envelope"></i> Gönderilmiş Mesajlar
+                                        <span class="badge bg-primary float-right">@ViewBag.d2</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-file-alt"></i> Taslaklar
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-filter"></i> Spam
+                                        <span class="badge bg-warning float-right">65</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-trash-alt"></i> Çöp Kutusu
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- /.card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Filtreler</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-danger"></i>
+                                        Önemliler
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-warning"></i> Promosyanlar
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-primary"></i> Sosyal
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.col -->
+
+                <div class="col-md-9">
+
+                    <div class="card card-primary card-outline">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">Mesaj Yaz</h3>
+
+                        </div>
+
+                        <!-- /.card-header -->
+                        <form method="post">
+                            <div class="card-body">
+
+                                <div class="form-group">
+
+                                    <input class="form-control" name="Alıcı" placeholder="Kime:">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input class="form-control" name="Konu" placeholder="Konu:">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <textarea name="icerik" id="compose-textarea" class="form-control" style="height: 300px">                                
+
+                                    </textarea>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
+
+                            </div>
+                        </form>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <div class="float-right">
+                            </div>
+                        </div>
+
+                        <!-- /.card-footer -->
+
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+
+                <!-- /.col -->
+
+            </div>
+
+            <!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+
+    <script src="~/AdminLTE-3.0.4/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE App -->
+
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+
+    <!-- Summernote -->
+
+    <script src="~/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <!-- Page Script -->
+
+    <script>
+        $(function () {
+
+            //Add text editor
+
+            $('#compose-textarea').summernote()
+
+        })</script>
+
+</body>
+
+</html>

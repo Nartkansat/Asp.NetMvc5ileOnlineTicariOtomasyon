@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MvcOnlineTicariOtomasyon.Models.Siniflar.SinifGrup3>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Ürün & Marka Tablosu</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Marka</th>
+                    <th>Progress Bar</th>
+                    <th style="width: 40px">Toplam</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int sirano = 0;
+                }
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@{sirano++; } @sirano</td>
+                        <td>@x.Marka</td>
+                        <td>
+                            @if (x.Sayi == 1)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-danger" style="width: 55%"></div>
+                                </div>
+                            }
+                            @if (x.Sayi == 2)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                </div>
+                            }
+                            @if (x.Sayi >= 5)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-primary" style="width: 90%"></div>
+                                </div>
+                            }
+                        </td>
+
+                        <td style="padding-top:0px !important;">
+                            @if (x.Sayi ==1)
+                            {
+                                <span class="badge bg-warning">@x.Sayi</span>
+                            }
+                            @if (x.Sayi == 2)
+                            {
+                                <span class="badge bg-primary">@x.Sayi</span>
+                            }
+                            @if (x.Sayi >= 5)
+                            {
+                                <span class="badge bg-danger">@x.Sayi</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

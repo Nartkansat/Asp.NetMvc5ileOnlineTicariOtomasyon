@@ -1,0 +1,34 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Seri No</th>
+        <th>Sıra No</th>
+        <th>Tarih</th>
+        <th>Toplam</th>
+        <th>Güncelle</th>
+        <th>Fatura Kalem</th>
+    </tr>
+
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td> @k.FaturaSeriNo </td>
+            <td> @k.FaturaSıraNo </td>
+            <td> @Convert.ToDateTime(@k.Tarih).ToString("dd MMM yyyy") - @k.Saat</td> 
+            <td> @k.Toplam ₺ </td>
+            <td><a href="/Fatura/FaturaGetir/@k.Faturaid" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Fatura/FaturaDetay/@k.Faturaid" class="btn btn-warning">Fatura Kalem</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Fatura/FaturaEkle" class="btn btn-info">Fatura Ekle</a>
+

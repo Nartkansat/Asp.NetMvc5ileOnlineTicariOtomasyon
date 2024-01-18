@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+@*Chart Türleri : pie,doughnut,buble,area,bar *@
+
+@{ 
+    var grafik = new Chart(width: 500, height: 500);
+    grafik.AddTitle(text: "Kategoriler Ve Ürün Sayıları");
+    grafik.AddLegend(title: "Değerler");
+
+    grafik.AddSeries(
+        name: "Veriler",
+        chartType:"Pie",
+        xValue: new[] {"Beyaz Eşya","Televizyon","Bilgisayar","Küçük Ev Aletleri"},
+        yValues: new[] {500,250,340,620}
+        );
+    grafik.Write();
+}

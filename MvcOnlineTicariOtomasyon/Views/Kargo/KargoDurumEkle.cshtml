@@ -1,0 +1,25 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.KargoTakip
+
+@{
+    ViewBag.Title = "KargoDurumEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Kargo Durum Bilgisi</h2>
+<br />
+
+<form method="post">
+
+    @Html.LabelFor(x => x.TakipKodu)
+    @Html.TextBoxFor(x => x.TakipKodu, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.Aciklama)
+    @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(x => x.TarihZaman)
+    @Html.TextBoxFor(x => x.TarihZaman, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-primary">Ekle</button>
+</form>

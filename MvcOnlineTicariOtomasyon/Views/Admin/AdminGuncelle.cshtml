@@ -1,0 +1,21 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Admin
+@{
+    ViewBag.Title = "AdminGuncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<h2>Admin Güncelleme</h2>
+<br />
+
+
+@using (Html.BeginForm("AdminGuncelle2", "Admin", FormMethod.Post)) //bir post işlemi olunca hangi actionResult çalışacak onun için.
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.Yetki)
+        @Html.TextBoxFor(x => x.Yetki, new { @class = "form-control" })
+        @Html.HiddenFor(x => x.Adminid)
+    </div>
+    <button class="btn btn-success">Güncelle</button>
+}

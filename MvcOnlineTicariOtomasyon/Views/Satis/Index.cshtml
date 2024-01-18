@@ -1,0 +1,70 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<SatisHareket>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br/>
+<table id="tbl1" class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Ürün</th>
+            <th>Cari</th>
+            <th>Personel</th>
+            <th>Adet</th>
+            <th>Fiyat</th>
+            <th>Toplam</th>
+            <th>Tarih</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
+        </tr>
+    </thead>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td> @p.Urun.UrunAd </td>
+            <td> @p.Cariler.CariAd @p.Cariler.CariSoyad </td>
+            <td> @p.Personel.PersonelAd @p.Personel.PersonelSoyad</td>
+            <td> @p.Adet </td>
+            <td> @p.Fiyat </td>
+            <td> @p.ToplamTutar </td>
+            <td> @Convert.ToDateTime(@p.Tarih).ToString("dd/MM/yyyy") </td>
+            <td><a href="/Satis/SatisGetir/@p.Satisid" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Satis/SatisDetay/@p.Satisid" class="btn btn-warning">Detaylar</a></td>
+        </tr>
+    }
+
+</table>
+
+<a href="/Satis/SatisEkle/" class="btn btn-info">Satış Ekle</a>
+
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+<script>
+
+    $('#tbl1').DataTable({
+
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+
+    });
+
+    
+
+</script>
+
+

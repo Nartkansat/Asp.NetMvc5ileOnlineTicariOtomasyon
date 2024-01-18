@@ -1,0 +1,72 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Kategori Adı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td> @k.KategoriAd </td>
+            <td>
+                <button class="btn btn-danger" onclick="SilKategori(@k.KategoriID)"><i class="fas fa-trash"></i> Sil</button>
+            </td>
+            <td><a href="/Kategori/KategoriGetir/@k.KategoriID" class="btn btn-success"><i class="fas fa-edit"></i> Güncelle</a></td>
+        </tr>
+    }
+
+</table>
+
+@* Sayfalama için PagedList kullandık.  *@
+
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
+{
+    LiElementClasses = new List<string>
+    {"page-link"}
+})
+<a href="/Kategori/KategoriEkle" class="btn btn-primary">Kategori Ekle</a>
+
+
+@*Kategori Silme için Script, görüntü için*@
+<script>
+    function SilKategori(kategoriID) {
+        swal({
+            title: "Kategoriyi silmek istediğinize emin misiniz?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "İptal",
+                    visible: true,
+                },
+                confirm: {
+                    text: "Evet",
+                    closeModal: false,
+                },
+            },
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "/Kategori/KategoriSil/" + kategoriID;
+                } else {
+                    swal("Kategori silme işlemi iptal edildi.");
+                }
+            });
+    }
+</script>
+

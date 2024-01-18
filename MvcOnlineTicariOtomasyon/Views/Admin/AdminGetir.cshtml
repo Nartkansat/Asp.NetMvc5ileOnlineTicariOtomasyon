@@ -1,0 +1,24 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Admin>
+
+@{
+    ViewBag.Title = "AdminGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Kullanıcı Adı</th>
+        <th>Yetkilendir</th>
+    </tr>
+
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td> @k.KullaniciAd </td>
+            <td><a href="/Admin/AdminGuncelle/@k.Adminid" class="btn btn-success"><i class="fas fa-edit"></i> Güncelle</a></td>
+        </tr>
+    }
+
+</table>

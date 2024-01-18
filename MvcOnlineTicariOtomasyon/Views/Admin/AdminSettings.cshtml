@@ -1,0 +1,87 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.Admin
+
+@{
+    ViewBag.Title = "AdminSettings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h4>Ayarlar</h4>
+<br />
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <td>Kullanıcı Adı</td>
+            <td>Şifre</td>
+            <td>#</td>
+
+        </tr>
+        <tr>
+            <td>@Model.KullaniciAd</td>
+            <td><span id="passwordField">@Model.Sifre</span></td>
+            <td><a href="#" class="btn btn-success" data-toggle="modal" data-target="#passwordChangeModal">Şifre Değiştir</a></td>
+        </tr>
+        <!-- Diğer admin özelliklerini buraya ekleyebilirsiniz -->
+    </table>
+
+    <!-- Şifre Değiştirme Modal Penceresi -->
+    <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Şifre Değiştir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post))
+                {
+                    <div class="modal-body">
+                        <!-- Şifre değiştirme formu -->
+
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="newPassword">Yeni Şifre:</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal açıldığında temizleme işlemi
+        $('#passwordChangeModal').on('shown.bs.modal', function () {
+            $('#newPassword').val('');
+        });
+
+        // Şifre değiştirme formunu gönderme işlemi
+        $('form').submit(function (event) {
+            event.preventDefault();
+            var newPassword = $('#newPassword').val();
+
+            // Yeni şifreyi kontrol etme ve gerekli işlemleri yapma
+            if (newPassword.length >= 6) {
+                // Formu gönderme
+                $(this).unbind('submit').submit();
+            } else {
+                alert("Şifre en az 6 karakter uzunluğunda olmalıdır.");
+            }
+        });
+    </script>
+}
+else
+{
+    <p>
+        Belirtilen kullanıcı adına sahip bir Admin bulunamadı.
+    </p>
+}
+
+<!-- Bootstrap ve jQuery bağlantıları eklenebilir -->
